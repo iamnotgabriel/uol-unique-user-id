@@ -11,7 +11,7 @@ Table that contains the data entered by the user at the time of registration
 | user_email    | TEXT    | example@email.com     | User email                                   |
 | user_password | TEXT    | \$2a\$05\$bvIG6Nmi... | User hashed password by bcrypt method        |
 | user_phone    | TEXT    | 12988112233           | User phone number                            |
-| user_is_admin | BOOLEAN | 1                     | Controls whether the user is an admin or not |
+| user_is_admin | BOOLEAN | 1                     | Controls whether the user is an admin or not.   Default is 0|
 
 ## **signup_metadata**
 
