@@ -10,6 +10,7 @@ create table if not exists users (
 );
 create table if not exists signup_metadata (
   signup_md_id serial primary key,
+  signup_md_device_id text not null,
   signup_md_user_id int not null,
   signup_md_ctrlv_count int not null,
   signup_md_start_date timestamp not null,
