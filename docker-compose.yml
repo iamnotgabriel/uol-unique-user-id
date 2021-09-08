@@ -4,13 +4,12 @@ services:
   db:
     image: postgres:9
     restart: unless-stopped
-    container_name: passwordSafeDB
+    container_name: uolDB
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pwd
-      POSTGRES_DB: passwordSafe
+      POSTGRES_DB: uol
     ports:
       - "5430:5432"
     volumes:
       - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-
