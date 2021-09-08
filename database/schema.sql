@@ -21,5 +21,5 @@ create table if not exists signup_metadata (
   signup_md_screen_height int not null,
   signup_md_device_name text not null,
   signup_md_browser text not null,
-  constraint fk_user_id foreign key(signup_md_user_id) references users(user_id)
+  constraint fk_user_id foreign key(signup_md_user_id) references users(user_id) on delete cascade
 );
