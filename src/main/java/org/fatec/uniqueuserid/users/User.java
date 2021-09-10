@@ -1,5 +1,7 @@
 package org.fatec.uniqueuserid.users;
 
+import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
+
 import javax.persistence.*;
 
 @Entity

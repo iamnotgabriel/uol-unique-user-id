@@ -1,5 +1,7 @@
 package org.fatec.uniqueuserid.users;
 
+import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserAsserts {

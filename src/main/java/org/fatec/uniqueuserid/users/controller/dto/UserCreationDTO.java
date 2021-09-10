@@ -1,4 +1,4 @@
-package org.fatec.uniqueuserid.users;
+package org.fatec.uniqueuserid.users.controller.dto;
 
 public class UserCreationDTO {
     public String name;

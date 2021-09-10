@@ -5,8 +5,7 @@ create table if not exists users (
   user_password text not null,
   user_phone text not null,
   user_is_admin boolean,
-  constraint uq_users_email unique(user_email),
-  constraint uq_users_phone unique(user_phone)
+  constraint uq_users_email unique(user_email)
 );
 
 create table if not exists signup_metadata (
