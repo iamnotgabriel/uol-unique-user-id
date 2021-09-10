@@ -8,6 +8,7 @@ create table if not exists users (
   constraint uq_users_email unique(user_email),
   constraint uq_users_phone unique(user_phone)
 );
+
 create table if not exists signup_metadata (
   signup_md_id serial primary key,
   signup_md_device_id text not null,
