@@ -3,6 +3,7 @@ package org.fatec.uniqueuserid.users;
 import org.fatec.uniqueuserid.errors.ApiError;
 import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
 import org.fatec.uniqueuserid.users.controller.UsersController;
+import org.fatec.uniqueuserid.users.service.ISingUpRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
+
+import java.sql.Timestamp;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +25,9 @@ public class UserControllerTests {
     @Autowired
     UsersController usersController;
 
+    @Autowired
+    ISingUpRepository singUpRepository;
+
     @Test
     void contextLoads() {}
 
@@ -30,13 +37,21 @@ public class UserControllerTests {
         dto.email = "spike@bebop.space";
         dto.password = "where_is_julia";
         dto.phone = "998887777";
+        dto.deviceId = "b4008911";
+        dto.startTime = new Timestamp(0L);
+        dto.endTime = new Timestamp(System.currentTimeMillis());
+        dto.pasteCount = 1;
         return dto;
     }
 
     @Test
     void testCreateUserSuccess() {
         UserCreationDTO dto = getUserDTO();
+
         ResponseEntity<Object> res = usersController.createUser(dto);
+
+        List<SingUp> singUp = singUpRepository.findAll();
+        assertTrue(singUp.size() > 0);
         assertEquals(HttpStatus.OK, res.getStatusCode());
         UserAsserts.equalsDTO(dto, (User) res.getBody());
     }
