@@ -1,22 +1,25 @@
 package org.fatec.uniqueuserid.users;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.apache.coyote.Response;
 import org.fatec.uniqueuserid.errors.ApiError;
-import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
 import org.fatec.uniqueuserid.users.controller.UsersController;
-import org.fatec.uniqueuserid.users.service.ISingUpRepository;
+import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
+import org.fatec.uniqueuserid.users.controller.dto.UserDTO;
+import org.fatec.uniqueuserid.users.service.ISignUpRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
-
-import javax.transaction.Transactional;
-
-import java.sql.Timestamp;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -26,10 +29,11 @@ public class UserControllerTests {
     UsersController usersController;
 
     @Autowired
-    ISingUpRepository singUpRepository;
+    ISignUpRepository signUpRepository;
 
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+    }
 
     UserCreationDTO getUserDTO() {
         UserCreationDTO dto = new UserCreationDTO();
@@ -50,7 +54,7 @@ public class UserControllerTests {
 
         ResponseEntity<Object> res = usersController.createUser(dto);
 
-        List<SingUp> singUp = singUpRepository.findAll();
+        List<SignUp> singUp = signUpRepository.findAll();
         assertTrue(singUp.size() > 0);
         assertEquals(HttpStatus.OK, res.getStatusCode());
         UserAsserts.equalsDTO(dto, (User) res.getBody());
@@ -74,6 +78,38 @@ public class UserControllerTests {
         ResponseEntity<Object> fails = usersController.createUser(dto);
         assertEquals(HttpStatus.OK, ok.getStatusCode());
         assertEquals(HttpStatus.BAD_REQUEST, fails.getStatusCode());
+    }
+
+    @Test
+    void testGetAllUsers() {
+        UserCreationDTO dto = getUserDTO();
+        usersController.createUser(dto);
+
+        dto.email = "other@email.com";
+        dto.name = "Other Name";
+        dto.deviceId = "h1a2l32";
+        usersController.createUser(dto);
+
+        ResponseEntity<List<UserDTO>> response = usersController.findAll();
+        List<UserDTO> users = response.getBody();
+
+        assertEquals(users.size(), 2);
+
+        assertEquals(users.get(0).name, "Spike Spiegel");
+        assertEquals(users.get(0).email, "spike@bebop.space");
+        assertEquals(users.get(0).deviceId, "b4008911");
+
+        assertEquals(users.get(1).name, "Other Name");
+        assertEquals(users.get(1).email, "other@email.com");
+        assertEquals(users.get(1).deviceId, "h1a2l32");
+    }
+
+    @Test
+    void testGetEmptyUserList() {
+        ResponseEntity<List<UserDTO>> response = usersController.findAll();
+        List<UserDTO> users = response.getBody();
+
+        assertEquals(users.size(), 0);
     }
 
 }

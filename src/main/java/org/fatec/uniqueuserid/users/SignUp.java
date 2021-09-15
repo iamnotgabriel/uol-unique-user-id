@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "signup_metadata")
-public class SingUp {
+public class SignUp {
     @Id
     @Column(name="signup_md_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,16 +50,16 @@ public class SingUp {
     @Column(name="signup_md_browser")
     private String browserName = "not collected";
 
-    public SingUp() {}
+    public SignUp() {}
 
-    public static SingUp create(UserCreationDTO dto, User user) {
-        SingUp singUp = new SingUp();
-        singUp.deviceId = dto.deviceId;
-        singUp.startTime = dto.startTime;
-        singUp.endTime =  dto.endTime;
-        singUp.pasteCount = dto.pasteCount;
-        singUp.user = user;
-        return singUp;
+    public static SignUp create(UserCreationDTO dto, User user) {
+        SignUp signUp = new SignUp();
+        signUp.deviceId = dto.deviceId;
+        signUp.startTime = dto.startTime;
+        signUp.endTime =  dto.endTime;
+        signUp.pasteCount = dto.pasteCount;
+        signUp.user = user;
+        return signUp;
     }
 
     public Integer getId() {
