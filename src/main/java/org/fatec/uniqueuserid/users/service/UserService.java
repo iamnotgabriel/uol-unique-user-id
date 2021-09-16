@@ -1,13 +1,13 @@
 package org.fatec.uniqueuserid.users.service;
 
-import org.fatec.uniqueuserid.users.SingUp;
+import org.fatec.uniqueuserid.users.SignUp;
 import org.fatec.uniqueuserid.users.User;
 import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
+import java.util.List;
 
 @Service("userService")
 public class UserService implements IUserService {
@@ -15,7 +15,7 @@ public class UserService implements IUserService {
     IUserRepository userRepository;
 
     @Autowired
-    ISingUpRepository singUpRepository;
+    ISignUpRepository signUpRepository;
 
     @Autowired
     UserCreationValidator userCreationValidator;
@@ -25,8 +25,13 @@ public class UserService implements IUserService {
         userCreationValidator.validate(userDTO);
         User newUser = User.create(userDTO);
         newUser = userRepository.save(newUser);
-        SingUp signUp = SingUp.create(userDTO, newUser);
-        singUpRepository.save(signUp);
+        SignUp signUp = SignUp.create(userDTO, newUser);
+        signUpRepository.save(signUp);
         return newUser;
+    }
+
+    @Override
+    public List<SignUp> findAll() {
+        return signUpRepository.findAll();
     }
 }
