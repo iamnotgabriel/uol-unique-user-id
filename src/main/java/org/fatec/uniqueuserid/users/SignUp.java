@@ -48,7 +48,7 @@ public class SignUp {
     private String deviceName = "not collected";
 
     @Column(name="signup_md_browser")
-    private String browserName = "not collected";
+    private String browser = "not collected";
 
     public SignUp() {}
 
@@ -59,7 +59,7 @@ public class SignUp {
         signUp.endTime =  dto.endTime;
         signUp.pasteCount = dto.pasteCount;
         signUp.user = user;
-        signUp.browserName = dto.browserName;
+        signUp.browser = dto.browser;
         signUp.ip = dto.ip;
         signUp.screenHeight = dto.screenHeight;
         signUp.screenWidth = dto.screenWidth;
@@ -108,7 +108,7 @@ public class SignUp {
         return deviceName;
     }
 
-    public String getBrowserName() {
-        return browserName;
+    public String getBrowser() {
+        return browser;
     }
 }

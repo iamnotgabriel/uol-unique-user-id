@@ -13,7 +13,7 @@ public class UserCreationDTO {
     public Timestamp endTime;
     public String os;
     public String ip;
-    public String browserName;
+    public String browser;
     public Integer screenHeight;
     public Integer screenWidth;
     public String timezone;
