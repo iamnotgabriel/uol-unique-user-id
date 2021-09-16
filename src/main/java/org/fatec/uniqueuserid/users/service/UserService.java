@@ -25,6 +25,7 @@ public class UserService implements IUserService {
         userCreationValidator.validate(userDTO);
         User newUser = User.create(userDTO);
         newUser = userRepository.save(newUser);
+        System.out.println(userDTO.deviceId);
         SignUp signUp = SignUp.create(userDTO, newUser);
         signUpRepository.save(signUp);
         return newUser;

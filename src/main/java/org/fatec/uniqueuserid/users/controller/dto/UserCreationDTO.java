@@ -11,4 +11,10 @@ public class UserCreationDTO {
     public Integer pasteCount;
     public Timestamp startTime;
     public Timestamp endTime;
+    public String os;
+    public String ip;
+    public String browserName;
+    public Integer screenHeight;
+    public Integer screenWidth;
+    public String timezone;
 }

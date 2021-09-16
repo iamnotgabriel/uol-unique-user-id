@@ -59,6 +59,12 @@ public class SignUp {
         signUp.endTime =  dto.endTime;
         signUp.pasteCount = dto.pasteCount;
         signUp.user = user;
+        signUp.browserName = dto.browserName;
+        signUp.ip = dto.ip;
+        signUp.screenHeight = dto.screenHeight;
+        signUp.screenWidth = dto.screenWidth;
+        signUp.os = dto.os;
+        signUp.timezone = dto.timezone;
         return signUp;
     }
 
