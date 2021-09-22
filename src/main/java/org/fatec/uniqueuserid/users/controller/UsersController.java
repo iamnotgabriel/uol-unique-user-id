@@ -3,6 +3,7 @@ package org.fatec.uniqueuserid.users.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.fatec.uniqueuserid.errors.ApiError;
 import org.fatec.uniqueuserid.users.SignUp;
 import org.fatec.uniqueuserid.users.User;
@@ -44,13 +45,11 @@ public class UsersController {
     }
 
     @GetMapping(value = "", produces = "application/json")
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<UserDTO> users = userService.findAll()
-            .stream()
-            .map(this::toUserDTO)
-            .collect(Collectors.toList());
+    @JsonView(User.UserData.class)
+    public ResponseEntity<List<User>> findAll() {
+        List<User> users = userService.findAll();
 
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return new ResponseEntity(users, HttpStatus.OK);
     }
 
     private UserDTO toUserDTO(SignUp signup) {

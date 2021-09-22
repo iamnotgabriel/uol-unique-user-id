@@ -90,24 +90,24 @@ public class UserControllerTests {
         dto.deviceId = "h1a2l32";
         usersController.createUser(dto);
 
-        ResponseEntity<List<UserDTO>> response = usersController.findAll();
-        List<UserDTO> users = response.getBody();
+        ResponseEntity<List<User>> response = usersController.findAll();
+        List<User> users = response.getBody();
 
         assertEquals(users.size(), 2);
 
-        assertEquals(users.get(0).name, "Spike Spiegel");
-        assertEquals(users.get(0).email, "spike@bebop.space");
-        assertEquals(users.get(0).deviceId, "b4008911");
+        assertEquals(users.get(0).getName(), "Spike Spiegel");
+        assertEquals(users.get(0).getEmail(), "spike@bebop.space");
+        assertEquals(users.get(0).getSignUp().getDeviceId(), "b4008911");
 
-        assertEquals(users.get(1).name, "Other Name");
-        assertEquals(users.get(1).email, "other@email.com");
-        assertEquals(users.get(1).deviceId, "h1a2l32");
+        assertEquals(users.get(1).getEmail(), "Other Name");
+        assertEquals(users.get(1).getEmail(), "other@email.com");
+        assertEquals(users.get(1).getSignUp().getDeviceId(), "h1a2l32");
     }
 
     @Test
     void testGetEmptyUserList() {
-        ResponseEntity<List<UserDTO>> response = usersController.findAll();
-        List<UserDTO> users = response.getBody();
+        ResponseEntity<List<User>> response = usersController.findAll();
+        List<User> users = response.getBody();
 
         assertEquals(users.size(), 0);
     }

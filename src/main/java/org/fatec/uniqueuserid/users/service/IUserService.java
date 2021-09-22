@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface IUserService {
     User create(UserCreationDTO userDTO) throws Exception;
-    List<SignUp> findAll();
+    List<User> findAll();
 }

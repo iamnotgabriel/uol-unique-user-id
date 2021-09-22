@@ -32,7 +32,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<SignUp> findAll() {
-        return signUpRepository.findAll();
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package org.fatec.uniqueuserid.users;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
 
 import javax.persistence.*;
@@ -7,22 +8,33 @@ import javax.persistence.*;
 @Entity
 @Table(name="users")
 public class User {
+
+    public static class UserData {}
+
     @Id
     @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(User.UserData.class)
     private Integer id;
 
     @Column(name="user_name")
+    @JsonView(User.UserData.class)
     private String name;
 
     @Column(name="user_email")
+    @JsonView(User.UserData.class)
     private String email;
 
     @Column(name="user_phone")
+    @JsonView(User.UserData.class)
     private String phone;
 
     @Column(name="user_password")
     private String password;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonView(User.UserData.class)
+    SignUp signUp;
 
     public static User create(UserCreationDTO dto) {
         User user = new User();
@@ -74,4 +86,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public SignUp getSignUp() { return signUp; }
 }
