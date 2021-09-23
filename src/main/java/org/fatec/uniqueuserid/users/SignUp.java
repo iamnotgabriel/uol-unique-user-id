@@ -62,6 +62,14 @@ public class SignUp {
     @JsonView(User.UserData.class)
     private String browser = "not collected";
 
+    @Column(name="signup_md_cpu_cores")
+    @JsonView({User.UserData.class})
+    private Short cpuCores;
+
+    @Column(name="signup_md_gpu_name")
+    @JsonView({User.UserData.class})
+    private String gpuName;
+
     public SignUp() {}
 
     public static SignUp create(UserCreationDTO dto, User user) {
@@ -77,6 +85,8 @@ public class SignUp {
         signUp.screenWidth = dto.screenWidth;
         signUp.os = dto.os;
         signUp.timezone = dto.timezone;
+        signUp.cpuCores = dto.cpuCores;
+        signUp.gpuName = dto.gpuName;
         return signUp;
     }
 
@@ -118,6 +128,22 @@ public class SignUp {
 
     public String getDeviceName() {
         return deviceName;
+    }
+
+    public Short getCpuCores() {
+        return cpuCores;
+    }
+
+    public void setCpuCores(Short cpuCores) {
+        this.cpuCores = cpuCores;
+    }
+
+    public String getGpuName() {
+        return gpuName;
+    }
+
+    public void setGpuName(String gpuName) {
+        this.gpuName = gpuName;
     }
 
     public String getBrowser() {

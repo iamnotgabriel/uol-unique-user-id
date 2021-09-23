@@ -17,4 +17,6 @@ public class UserCreationDTO {
     public Integer screenHeight;
     public Integer screenWidth;
     public String timezone;
+    public Short cpuCores;
+    public String gpuName;
 }
