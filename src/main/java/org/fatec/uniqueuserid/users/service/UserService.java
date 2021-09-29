@@ -1,13 +1,15 @@
 package org.fatec.uniqueuserid.users.service;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.fatec.uniqueuserid.users.SignUp;
 import org.fatec.uniqueuserid.users.User;
 import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Service("userService")
 public class UserService implements IUserService {
@@ -33,6 +35,6 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAll(Sort.by(Sort.Direction.ASC, "signUp.deviceId"));
     }
 }
