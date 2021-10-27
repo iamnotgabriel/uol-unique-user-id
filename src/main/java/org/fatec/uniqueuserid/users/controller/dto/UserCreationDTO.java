@@ -1,6 +1,7 @@
 package org.fatec.uniqueuserid.users.controller.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class UserCreationDTO {
     public String name;
@@ -19,4 +20,6 @@ public class UserCreationDTO {
     public String timezone;
     public Short cpuCores;
     public String gpuName;
+    public List<Integer> keyUps;
+    public List<Integer> keyDowns;
 }

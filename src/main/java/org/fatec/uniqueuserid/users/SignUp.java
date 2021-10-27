@@ -78,7 +78,13 @@ public class SignUp {
 
     @Column(name="sign_up_md_key_ups", columnDefinition = "json")
     @Type(type = "json")
+    @JsonView({User.UserData.class})
     private List<Integer> keyUps;
+
+    @Column(name="sign_up_md_key_downs", columnDefinition = "json")
+    @Type(type = "json")
+    @JsonView({User.UserData.class})
+    private List<Integer> keyDowns;
 
     public SignUp() {}
 
@@ -97,6 +103,8 @@ public class SignUp {
         signUp.timezone = dto.timezone;
         signUp.cpuCores = dto.cpuCores;
         signUp.gpuName = dto.gpuName;
+        signUp.keyUps = dto.keyUps;
+        signUp.keyDowns = dto.keyDowns;
         return signUp;
     }
 
@@ -172,4 +180,13 @@ public class SignUp {
     public void setKeyUps(List<Integer> keyUps) {
         this.keyUps = keyUps;
     }
+
+    public List<Integer> getKeyDowns() {
+        return keyDowns;
+    }
+
+    public void setKeyDowns(List<Integer> keyDowns) {
+        this.keyDowns = keyDowns;
+    }
+
 }
