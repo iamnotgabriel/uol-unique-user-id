@@ -1,13 +1,19 @@
 package org.fatec.uniqueuserid.users;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "signup_metadata")
+@TypeDef(name = "json", typeClass = JsonBinaryType.class)
 public class SignUp {
     @Id
     @Column(name="signup_md_id")
@@ -20,15 +26,15 @@ public class SignUp {
 
     @Column(name = "signup_md_device_id")
     @JsonView(User.UserData.class)
-    private String deviceId;
+    private String deviceId = "not collected";
 
     @Column(name="signup_md_start_date")
     @JsonView(User.UserData.class)
-    private Timestamp startTime;
+    private Timestamp startTime = new Timestamp(0);
 
     @Column(name="signup_md_end_date")
     @JsonView(User.UserData.class)
-    private Timestamp endTime;
+    private Timestamp endTime = new Timestamp(0);;
 
     @Column(name="signup_md_timezone")
     @JsonView(User.UserData.class)
@@ -40,7 +46,7 @@ public class SignUp {
 
     @Column(name="signup_md_paste_count")
     @JsonView(User.UserData.class)
-    private Integer pasteCount;
+    private Integer pasteCount = 0;
 
     @Column(name="signup_md_os")
     @JsonView(User.UserData.class)
@@ -69,6 +75,10 @@ public class SignUp {
     @Column(name="signup_md_gpu_name")
     @JsonView({User.UserData.class})
     private String gpuName;
+
+    @Column(name="sign_up_md_key_ups", columnDefinition = "json")
+    @Type(type = "json")
+    private List<Integer> keyUps;
 
     public SignUp() {}
 
@@ -134,6 +144,11 @@ public class SignUp {
         return cpuCores;
     }
 
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void setCpuCores(Short cpuCores) {
         this.cpuCores = cpuCores;
     }
@@ -148,5 +163,13 @@ public class SignUp {
 
     public String getBrowser() {
         return browser;
+    }
+
+    public List<Integer> getKeyUps() {
+        return keyUps;
+    }
+
+    public void setKeyUps(List<Integer> keyUps) {
+        this.keyUps = keyUps;
     }
 }

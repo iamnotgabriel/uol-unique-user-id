@@ -24,5 +24,7 @@ create table if not exists signup_metadata (
   signup_md_browser text not null,
   signup_md_cpu_cores smallint default null,
   signup_md_gpu_name text default null,
+  sign_up_md_key_ups json default null,
+  sign_up_md_key_downs json default null,
   constraint fk_user_id foreign key(user_id) references users(user_id) on delete cascade
 );
