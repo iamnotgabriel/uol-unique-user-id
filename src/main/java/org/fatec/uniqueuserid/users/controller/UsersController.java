@@ -46,7 +46,7 @@ public class UsersController {
         }
     }
 
-    @CrossOrigin
+    @CrossOrigin()
     @GetMapping(value = "", produces = "application/json")
     @JsonView(User.UserData.class)
     public ResponseEntity<List<User>> findAll() {
