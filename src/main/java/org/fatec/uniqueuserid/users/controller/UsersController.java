@@ -28,11 +28,13 @@ public class UsersController {
     @Autowired
     IUserService userService;
 
+    @CrossOrigin
     @GetMapping(value = "/health", produces = "application/json")
     public ResponseEntity<String> hello() {
         return new ResponseEntity<String>("Hello", HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping(value = "", produces = "application/json")
     public ResponseEntity<Object> createUser(@RequestBody() UserCreationDTO userDTO) {
         try {
@@ -44,6 +46,7 @@ public class UsersController {
         }
     }
 
+    @CrossOrigin
     @GetMapping(value = "", produces = "application/json")
     @JsonView(User.UserData.class)
     public ResponseEntity<List<User>> findAll() {
