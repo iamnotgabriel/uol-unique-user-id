@@ -76,12 +76,12 @@ public class SignUp {
     @JsonView({User.UserData.class})
     private String gpuName;
 
-    @Column(name="sign_up_md_key_ups", columnDefinition = "json")
+    @Column(name="signup_md_key_ups", columnDefinition = "json")
     @Type(type = "json")
     @JsonView({User.UserData.class})
     private List<Integer> keyUps;
 
-    @Column(name="sign_up_md_key_downs", columnDefinition = "json")
+    @Column(name="signup_md_key_downs", columnDefinition = "json")
     @Type(type = "json")
     @JsonView({User.UserData.class})
     private List<Integer> keyDowns;

@@ -22,19 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/users")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UsersController {
 
     @Autowired
     IUserService userService;
 
-    @CrossOrigin
     @GetMapping(value = "/health", produces = "application/json")
     public ResponseEntity<String> hello() {
         return new ResponseEntity<String>("Hello", HttpStatus.OK);
     }
 
-    @CrossOrigin
     @PostMapping(value = "", produces = "application/json")
     public ResponseEntity<Object> createUser(@RequestBody() UserCreationDTO userDTO) {
         try {
