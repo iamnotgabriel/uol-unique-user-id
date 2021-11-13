@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/users")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UsersController {
 
     @Autowired
@@ -42,6 +42,7 @@ public class UsersController {
         }
     }
 
+    @CrossOrigin()
     @GetMapping(value = "", produces = "application/json")
     @JsonView(User.UserData.class)
     public ResponseEntity<List<User>> findAll() {
