@@ -21,6 +21,10 @@ public class User {
     @JsonView(User.UserData.class)
     private String name;
 
+    @Column(name="user_hashid")
+    @JsonView(User.UserData.class)
+    private String hashid;
+
     @Column(name="user_email")
     @JsonView(User.UserData.class)
     private String email;
@@ -38,8 +42,8 @@ public class User {
 
     public static User create(UserCreationDTO dto) {
         User user = new User();
-        user.email = dto.email;
         user.name = dto.name;
+        user.email = dto.email;
         user.phone = dto.phone;
         user.password = dto.password;
         return user;
@@ -61,6 +65,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getHashId() {
+        return hashid;
+    }
+
+    public void setHashId(String hashid) {
+        this.hashid = hashid;
     }
 
     public String getEmail() {
