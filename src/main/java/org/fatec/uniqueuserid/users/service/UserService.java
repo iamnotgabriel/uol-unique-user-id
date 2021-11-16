@@ -35,6 +35,6 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll(Sort.by(Sort.Direction.ASC, "signUp.deviceId"));
+        return userRepository.findAll(Sort.by(Sort.Direction.ASC, "hashid"));
     }
 }
