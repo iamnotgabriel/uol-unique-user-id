@@ -1,14 +1,12 @@
 package org.fatec.uniqueuserid.users.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonView;
+
 import org.fatec.uniqueuserid.errors.ApiError;
-import org.fatec.uniqueuserid.users.SignUp;
 import org.fatec.uniqueuserid.users.User;
 import org.fatec.uniqueuserid.users.controller.dto.UserCreationDTO;
-import org.fatec.uniqueuserid.users.controller.dto.UserDTO;
 import org.fatec.uniqueuserid.users.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,15 +50,4 @@ public class UsersController {
 
         return new ResponseEntity(users, HttpStatus.OK);
     }
-
-    private UserDTO toUserDTO(SignUp signup) {
-        UserDTO dto = new UserDTO();
-        dto.deviceId = signup.getDeviceId();
-        dto.name = signup.getUser().getName();
-        dto.email = signup.getUser().getEmail();
-        dto.id = signup.getUser().getId();
-
-        return dto;
-    }
-
 }

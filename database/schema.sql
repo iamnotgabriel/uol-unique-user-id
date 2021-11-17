@@ -4,6 +4,7 @@ create table if not exists users (
   user_email text not null,
   user_password text not null,
   user_phone text not null,
+  user_hashid varchar ( 15 ),
   user_is_admin boolean,
   constraint uq_users_email unique(user_email)
 );
