@@ -1,6 +1,5 @@
 package org.fatec.uniqueuserid;
 
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
