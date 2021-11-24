@@ -103,8 +103,8 @@ public class SignUp {
         signUp.timezone = dto.timezone;
         signUp.cpuCores = dto.cpuCores;
         signUp.gpuName = dto.gpuName;
-        signUp.keyUps = dto.keyUps;
-        signUp.keyDowns = dto.keyDowns;
+        signUp.setKeyUps(dto.keyUps);
+        signUp.setKeyDowns(dto.keyDowns);
         return signUp;
     }
 
@@ -178,7 +178,7 @@ public class SignUp {
     }
 
     public void setKeyUps(List<Integer> keyUps) {
-        this.keyUps = keyUps;
+        this.keyUps = normalize(keyUps);
     }
 
     public List<Integer> getKeyDowns() {
@@ -186,7 +186,21 @@ public class SignUp {
     }
 
     public void setKeyDowns(List<Integer> keyDowns) {
-        this.keyDowns = keyDowns;
+        this.keyDowns = normalize(keyDowns);
+    }
+
+    private List<Integer> normalize(List<Integer> l) {
+        int diff = 6 - l.size();
+        if (diff > 0) {
+            for(int i=0; i < diff; i++) {
+                l.add(0);
+            }
+        } else if (diff < 0) {
+            for(int i=0; i>diff; i--) {
+                l.remove(0);
+            }
+        }
+        return l;
     }
 
 }
