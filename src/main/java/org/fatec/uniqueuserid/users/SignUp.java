@@ -192,8 +192,9 @@ public class SignUp {
     private List<Integer> normalize(List<Integer> l) {
         int diff = 6 - l.size();
         if (diff > 0) {
+            int n = l.get(l.size() - 1);
             for(int i=0; i < diff; i++) {
-                l.add(0);
+                l.add(n);
             }
         } else if (diff < 0) {
             for(int i=0; i>diff; i--) {
